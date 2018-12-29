@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Etch-a-Sketch</title>
+    <link href="./style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <button id="clear-btn">Clear Grid</button>
+    <div class="grid-container"></div>
+
+    <script>
+        
+        function changeColour(e) {
+            e.target.classList.add("colourful");
+        }
+
+        // EFFECTS: clears grid and prompts user for new grid size
+        function updateGrid(e) {
+            clearGrid();
+            let newSquareNum = prompt("How many squares per side should the new grid have?")
+            // TODO: implement robustness for cancelling/entering a non number value
+            
+            gridDiv.childNodes.forEach(cell => {
+                cell.remove();
+            });
+
+            // for (let i = 0, n = gridDiv.childElementCount; i < n; i++) {
+            //     gridDiv.removeChild()
+            // }
+        }
+
+        function clearGrid() {
+            gridDiv.childNodes.forEach(cell => {
+                cell.classList.remove("colourful");
+            });
+        }
+
+        const gridDiv = document.querySelector(".grid-container");
+        const clearButton = document.querySelector("#clear-btn");
+        clearButton.addEventListener("click", updateGrid);
+
+        for (let i = 0; i < 16; i++) {
+            const cellDiv = document.createElement("div");
+            cellDiv.classList.add("cell");
+            cellDiv.addEventListener("mouseover", changeColour);
+            gridDiv.appendChild(cellDiv);
+        }
+
+        
+                
+    </script>
+</body>
+
+</html>
