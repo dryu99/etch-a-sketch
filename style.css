@@ -1,3 +1,8 @@
+:root {
+    --current-grid-size: 200px;
+    --current-cell-size: calc(var(--current-grid-size) / 4);
+}
+
 #clear-btn {
     display:block;
     margin: 0 auto;
@@ -6,10 +11,9 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(4, 50px);
-    grid-gap: 1px;
+    grid-template-columns: repeat(4, var(--current-cell-size));
     margin: 0 auto;
-    width: fit-content;
+    width: var(--current-grid-size);
 }
 
 .cell {    
