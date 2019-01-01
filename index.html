@@ -9,6 +9,7 @@
 
 <body>
     <button id="clear-btn">Clear Grid</button>
+    <button id="size-btn">Change Size</button>
     <div class="grid-container"></div>
 
     <script>
@@ -17,9 +18,8 @@
             e.target.classList.add("colourful");
         }
 
-        // EFFECTS: clears grid and prompts user for new grid size
-        function updateGrid(e) {
-            clearGrid();
+        // EFFECTS: updates grid size with user prompted value
+        function updateGrid(e) {            
 
             let i = gridDiv.childElementCount;
             while (i--) {
@@ -32,18 +32,15 @@
             } while (newSquareNum <= 0 || isNaN(Number(newSquareNum)));
 
             for (let i = 0, n = Math.pow(newSquareNum, 2); i < n; i++) {
-                const cellDiv = document.createElement("div");            
+                const cellDiv = document.createElement("div");                
                 cellDiv.classList.add("cell");
-
-                let cellSize = gridDiv.offsetWidth / newSquareNum;
-                cellDiv.style.width = `${cellSize}px`;
-                cellDiv.style.height = `${cellSize}px`;
-
                 cellDiv.addEventListener("mouseover", changeColour);
+
                 gridDiv.appendChild(cellDiv);
             }
 
-            gridDiv.style.gridTemplateColumns = `repeat(${newSquareNum}, ${gridDiv.offsetWidth / newSquareNum}px)`;             
+            gridDiv.style.gridTemplateColumns = `repeat(${newSquareNum}, ${newSquareNum}fr)`;             
+            
         }
 
         function clearGrid() {
@@ -54,7 +51,9 @@
 
         const gridDiv = document.querySelector(".grid-container");
         const clearButton = document.querySelector("#clear-btn");
-        clearButton.addEventListener("click", updateGrid);
+        const sizeButton = document.querySelector("#size-btn");
+        clearButton.addEventListener("click", clearGrid);
+        sizeButton.addEventListener("click", updateGrid);
 
         for (let i = 0; i < 16; i++) {
             const cellDiv = document.createElement("div");
