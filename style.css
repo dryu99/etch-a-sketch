@@ -4,23 +4,34 @@
 }
 
 :root {
-    --current-grid-size: 500px;    
+    --current-grid-size: 400px;    
 }
 
 body {
-    background-color: rgb(238, 238, 238);
+    background-color: rgb(177, 230, 255);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+p {
+    text-align: center;
+    font-size: 30pt;    
 }
 
 button {
-    display: block;
-    margin: 10px auto;
-    margin-bottom: 10px;
-    
+    display: inline-block;    
+    width: calc(0.5 * var(--current-grid-size));
+
+    border: 2px solid black;
+    border-radius: 25px;
+    background-color: greenyellow;
+
     font-size: 15pt;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-#size-btn {    
-    margin-bottom: 20px;
+#buttons {
+    margin: 20px 0;
+    text-align: center;
 }
 
 .grid-container {
@@ -30,12 +41,13 @@ button {
     width: var(--current-grid-size);
     height: var(--current-grid-size);
 
-    border: 1px solid black;
+    border: 30px solid red;
+    border-radius: 25px;
     background-color: white;
 }
 
 .cell {
-    border: 0.5px solid black;
+    border: 1px solid black;
 }
 
 .colourful {

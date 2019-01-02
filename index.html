@@ -8,41 +8,50 @@
 </head>
 
 <body>
-    <button id="clear-btn">Clear Grid</button>
-    <button id="size-btn">Change Size</button>
+    <p id="title">Etch-a-Sketch</p>
+    <div id="buttons">
+        <button id="clear-btn">Clear Grid</button>
+        <button id="size-btn">Change Size</button>
+    </div>
     <div class="grid-container"></div>
 
     <script>
 
+        // EFFECTS: changes the colour of the given event target
         function changeColour(e) {
             e.target.classList.add("colourful");
         }
 
         // EFFECTS: updates grid size with user prompted value
-        function updateGrid(e) {            
+        function updateGrid(e) {
+            let newSquareNum;
+            while (true) {
+                newSquareNum = prompt("How many squares per side should the new grid have?");
+                if (newSquareNum === null) {
+                    return;
+                } else if (newSquareNum <= 0 || newSquareNum > 64 || isNaN(Number(newSquareNum))) {
+                    alert("Please choose a value between 1 and 64");                        
+                } else {
+                    break;
+                }
+            }
 
             let i = gridDiv.childElementCount;
             while (i--) {
                 gridDiv.childNodes[i].remove();
             }
 
-            let newSquareNum;
-            do {
-                newSquareNum = prompt("How many squares per side should the new grid have?");
-            } while (newSquareNum <= 0 || isNaN(Number(newSquareNum)));
-
             for (let i = 0, n = Math.pow(newSquareNum, 2); i < n; i++) {
-                const cellDiv = document.createElement("div");                
+                const cellDiv = document.createElement("div");
                 cellDiv.classList.add("cell");
                 cellDiv.addEventListener("mouseover", changeColour);
 
                 gridDiv.appendChild(cellDiv);
             }
-
-            gridDiv.style.gridTemplateColumns = `repeat(${newSquareNum}, ${newSquareNum}fr)`;             
-            
+            gridDiv.style.gridTemplateColumns = `repeat(${newSquareNum}, ${newSquareNum}fr)`;
         }
 
+        // EFFECTS: turns all grid cells back to white
         function clearGrid() {
             gridDiv.childNodes.forEach(cell => {
                 cell.classList.remove("colourful");
@@ -62,8 +71,6 @@
             cellDiv.addEventListener("mouseover", changeColour);
             gridDiv.appendChild(cellDiv);
         }
-
-
 
     </script>
 </body>
